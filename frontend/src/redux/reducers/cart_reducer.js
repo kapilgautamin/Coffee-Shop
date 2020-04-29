@@ -41,7 +41,7 @@ const  updateProductUnits = (cart, product) => {
         };
 
         updatedCart[productIndex] = updatedUnitsProduct;
-    }else if(existingProduct.units + product.units == 0){
+    }else if(existingProduct.units + product.units === 0){
         updatedCart.splice(productIndex,1);
     }
     return updatedCart;

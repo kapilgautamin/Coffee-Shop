@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {createStore,applyMiddleware} from 'redux';
+import {createStore} from 'redux';
 import axios from "axios";
 import {Provider} from 'react-redux';
 import reducers from "./redux/reducers";
@@ -7,6 +7,7 @@ import reducers from "./redux/reducers";
 // import Products from './components/Products/Products';
 import ProductsContainer from './containers/ProductsContainer';
 import Pagination from './components/Pagination';
+import Navbar from './components/Navbar';
 import './App.css';
 
 const Store = createStore(reducers);
@@ -86,7 +87,12 @@ class App extends Component {
     const currentPosts = this.state.comments.slice(indexOfFirstPost,indexOfLastPost);
 
     return (
+      <>
+      <Provider store={Store}>
+          <Navbar />
+        </Provider>
       <div className="container clearfix d-flex flex-column">
+        
         <div className="row clearfix">
             <Provider store={Store}>
               <ProductsContainer />
@@ -101,6 +107,7 @@ class App extends Component {
           <Pagination itemsPerPage={this.state.itemsPerPage} totalItems={this.state.comments.length} currentPage={this.state.currentPage} paginate={this.paginate}/>
         </div>
       </div>
+      </>
     );
   }
 }

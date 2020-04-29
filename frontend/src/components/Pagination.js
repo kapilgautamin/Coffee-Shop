@@ -7,7 +7,7 @@ const Pagination = ({itemsPerPage,totalItems,currentPage,paginate}) => {
         pageNumbers.push(i);
     }
 
-    if (currentPage == 1){
+    if (currentPage === 1){
         return (
             <nav>
                 <ul className="pagination ml-5 pl-5">      
@@ -21,7 +21,7 @@ const Pagination = ({itemsPerPage,totalItems,currentPage,paginate}) => {
                 </ul>
             </nav>
         )
-    } else if(currentPage == lastPage){
+    } else if(currentPage === lastPage){
         return (
             <nav>
                 <ul className="pagination">      

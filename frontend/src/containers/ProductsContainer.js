@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Products from '../components/Products/Products';
-import CartList from '../components/Cart/CartList';
 import {addToCartAction} from '../redux/actions/CartAction'
 
 class ProductsContainer extends Component{
@@ -12,7 +11,6 @@ class ProductsContainer extends Component{
         // console.log("cart from state",this.props.cart);
         return (
             <div>
-            <CartList cart={cart} addToCartAction={addToCartAction}/>
             <Products addToCartAction={addToCartAction}/>
             </div>
         );
