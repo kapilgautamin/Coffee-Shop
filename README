@@ -1,0 +1,83 @@
+
+React Commands:
+    npm install -g create-react-app
+    npx crete-react-app frontend
+    npm install axios --save
+    cd frontend
+    Add 
+    "proxy": "http://localhost:3001",
+    to package.json of frontend/
+
+    npm install redux
+    npm install react-redux
+    npm run build 
+
+
+Express Commands:
+    npm install -g express-generator
+    express backend
+    cd backend
+    npm install 
+    npm install nodemon -g --save
+    npm install monk --save
+    nodemon app.js
+    //Since both React and express run on Port 3000, let us change express to run on Port 3001 instead
+    // app.listen(process.env.PORT || 3001)
+
+    //If cors Error
+    npm install --save cors
+    
+
+
+Concurrent Execution of React and node:
+    npm install -D concurrently
+    npm install ncp
+    //Make changes to start both React and node from the same place
+    npm run dev
+
+
+
+
+
+Deploy to Heroku
+    npm install ncp
+    npm run production
+
+.gitignore
+    Add all the node_modules to this file to ignore pushing them to Github
+
+
+
+
+
+
+MongoDB commands:
+
+	md \data\db
+	cd “C:\Program Files\MongoDB\Server\3.0\bin” (or wherever you installed MongoDB)
+	mongod
+
+
+
+
+
+
+
+
+
+Error resolve:
+    1. nodemon : File C:\Users\Kapil Gautam\AppData\Roaming\npm\nodemon.ps1 cannot be loaded because running scripts is 
+    disabled on this system. For more information, see about_Execution_Policies at 
+    https:/go.microsoft.com/fwlink/?LinkID=135170.
+
+    In this case for Windows, Run as Administrator and type:
+    > Set-ExecutionPolicy -ExecutionPolicy Unrestricted
+    and then select Y
+    After that nodemon can run on the machine	
+
+
+References :
+https://daveceddia.com/create-react-app-express-backend/
+https://dev.to/numtostr/running-react-and-node-js-in-one-shot-with-concurrently-2oac
+https://www.freecodecamp.org/news/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0/
+https://www.freecodecamp.org/news/deploy-a-react-node-app-to/
