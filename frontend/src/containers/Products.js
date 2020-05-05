@@ -1,6 +1,9 @@
 import React,{PureComponent} from 'react';
-import Product from './Product';
-import Pagination from '../Pagination'
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import Product from '../components/Products/Product';
+import Pagination from '../components/Pagination'
+import {addToCartAction} from '../redux/actions/CartAction'
 const products = [
   {
    id:1,
@@ -79,7 +82,7 @@ class Products extends PureComponent{
         super();
         this.state = {
             currentPage:1,
-            itemsPerPage:4
+            itemsPerPage:8
         }
     }
 
@@ -109,4 +112,16 @@ class Products extends PureComponent{
     }
 }
 
-export default Products;
+const mapStateToProps = ({cart}) => {
+    return{
+      cart:cart
+    }
+  }
+  
+const mapActionsToProps = (dispatch) => {
+    return bindActionCreators({
+        addToCartAction
+    },dispatch);
+}
+  
+export default connect(mapStateToProps, mapActionsToProps)(Products);

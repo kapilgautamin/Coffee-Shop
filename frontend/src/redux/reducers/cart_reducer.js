@@ -23,7 +23,6 @@ const cartReducer = (state=[], action={}) => {
     return state;
 }
 
-
 const findProductIndex = (cart, productID) => {
     return cart.findIndex(p => p.id === productID);
 };

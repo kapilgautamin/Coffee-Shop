@@ -21,26 +21,26 @@ export default class CartList extends React.PureComponent{
         }
         // console.log(cart);
         return (
-        <div class="dropdown">
-          <button type="button" class="btn btn-info" data-toggle="dropdown">
-           <i class="fa fa-shopping-cart" aria-hidden="true"></i>Shopping Cart <span class="badge badge-pill badge-danger">{cartTotalQuantity}</span>
+        <div className="dropdown">
+          <button type="button" className="btn btn-info" data-toggle="dropdown">
+           <i className="fa fa-shopping-cart" aria-hidden="true"></i>Shopping Cart <span className="badge badge-pill badge-danger">{cartTotalQuantity}</span>
           </button>
-          <form class="dropdown-menu" style={{width:200}}>
-            <div class="row total-header-section">
-                <div class="col-lg-6 col-sm-6 col-6">
-                  <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger">{cartTotalQuantity}</span>
+          <form className="dropdown-menu" style={{width:200}}>
+            <div className="row total-header-section">
+                <div className="col-lg-6 col-sm-6 col-6">
+                  <i className="fa fa-shopping-cart" aria-hidden="true"></i> <span className="badge badge-pill badge-danger">{cartTotalQuantity}</span>
                 </div>
-                <div class="col-lg-6 col-sm-6 col-6 total-section text-right">
-                  <p>Total Amount: <span class="text-info">${cartTotal}</span></p>
+                <div className="col-lg-6 col-sm-6 col-6 total-section text-right">
+                  <p>Total Amount: <span className="text-info">${cartTotal}</span></p>
                 </div>
             </div>
             {
             cart.map(item => <CartItem {...item} key={item.id} addProd={this.handleAddProduct}/>)
             }
 
-            <div class="row">
-              <div class="col-lg-12 col-sm-12 col-12 text-center checkout">
-                <button class="btn btn-primary btn-block">Checkout</button>
+            <div className="row">
+              <div className="col-lg-12 col-sm-12 col-12 text-center checkout">
+                <button className="btn btn-primary btn-block">Checkout</button>
               </div>
             </div>
           </form>
@@ -52,17 +52,3 @@ export default class CartList extends React.PureComponent{
         );
     }
 }
-
-{/* <div class="btn-group float-right">
-                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Shopping Cart
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                <ul className="list-group">
-                    {
-                    cart.map(item => <CartItem {...item} key={item.id} addProd={this.handleAddProduct}/>)
-                    }
-                    <li className="list-group-item align-self-end dropdown-item">Sum Total: ${cartTotal}</li>
-                </ul>
-                </div>
-            </div> */}

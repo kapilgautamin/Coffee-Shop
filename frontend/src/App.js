@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import {createStore} from 'redux';
 import axios from "axios";
 import {Provider} from 'react-redux';
-import reducers from "./redux/reducers";
+import {combineReducers} from 'redux';
+import cartReducer from "./redux/reducers/cart_reducer";
 
-// import Products from './components/Products/Products';
-import ProductsContainer from './containers/ProductsContainer';
+import Products from './containers/Products';
 import Pagination from './components/Pagination';
 import Navbar from './components/Navbar';
 import './App.css';
 
-const Store = createStore(reducers);
+const Store = createStore(combineReducers({
+  cart: cartReducer
+}));
 
 class App extends Component {
 
@@ -95,7 +97,7 @@ class App extends Component {
         
         <div className="row clearfix">
             <Provider store={Store}>
-              <ProductsContainer />
+              <Products />
             </Provider>
         </div>
         <div className="row d-flex flex-column">
@@ -113,31 +115,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-{/* <div className="App">
-  <h1>Users</h1>
-  {this.state.users.map(user =>
-    <div key={user.id}>{user.username}</div>
-  )}
-  <h1>Videos</h1>
-  {this.state.videos.map(video =>
-    <div key={video.id}>{video.title},{video.genre},{video.description}</div>
-  )}
-</div>
-<div className="App">
-  <p>{this.state.response}</p>
-  <form onSubmit={this.handleSubmit}>
-    <p>
-      <strong>Post to Server:</strong>
-    </p>
-    <input
-      type="text"
-      value={this.state.post}
-      onChange={e => this.setState({ post: e.target.value })}
-    />
-    <button type="submit">Submit</button>
-  </form>
-  <p>{this.state.responseToPost}</p>
-</div> */}
-
