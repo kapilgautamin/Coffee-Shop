@@ -1,49 +1,49 @@
-
-import {ADD_TO_CART} from '../actions/CartAction';
+import { ADD_TO_CART } from "../actions/CartAction";
 // action = {
 //     type : "string",
 //     payload: "data"
 // }
 
-const cartReducer = (state=[], action={}) => {
-    switch(action.type){
-        case ADD_TO_CART:{
-            const product = action.payload;
-            const cart = state;
-            
-            const existingProductIndex = findProductIndex(cart, product.id);
+const cartReducer = (state = [], action = {}) => {
+  switch (action.type) {
+    case ADD_TO_CART: {
+      const product = action.payload;
+      const cart = state;
 
-            const updatedCart = existingProductIndex >= 0 
-                ? updateProductUnits(cart, product)
-                : [...cart, product];
+      const existingProductIndex = findProductIndex(cart, product.id);
 
-            return updatedCart;
-        }
+      const updatedCart =
+        existingProductIndex >= 0
+          ? updateProductUnits(cart, product)
+          : [...cart, product];
+
+      return updatedCart;
     }
-    return state;
-}
+  }
+  return state;
+};
 
 const findProductIndex = (cart, productID) => {
-    return cart.findIndex(p => p.id === productID);
+  return cart.findIndex((p) => p.id === productID);
 };
-  
-const  updateProductUnits = (cart, product) => {
-    const productIndex = findProductIndex(cart, product.id);
 
-    const updatedCart = [...cart];
-    const existingProduct = updatedCart[productIndex];
+const updateProductUnits = (cart, product) => {
+  const productIndex = findProductIndex(cart, product.id);
 
-    if(existingProduct.units + product.units > 0){
-        const updatedUnitsProduct = {
-            ...existingProduct,
-            units: existingProduct.units + product.units
-        };
+  const updatedCart = [...cart];
+  const existingProduct = updatedCart[productIndex];
 
-        updatedCart[productIndex] = updatedUnitsProduct;
-    }else if(existingProduct.units + product.units === 0){
-        updatedCart.splice(productIndex,1);
-    }
-    return updatedCart;
+  if (existingProduct.units + product.units > 0) {
+    const updatedUnitsProduct = {
+      ...existingProduct,
+      units: existingProduct.units + product.units,
+    };
+
+    updatedCart[productIndex] = updatedUnitsProduct;
+  } else if (existingProduct.units + product.units === 0) {
+    updatedCart.splice(productIndex, 1);
+  }
+  return updatedCart;
 };
 
 export default cartReducer;
