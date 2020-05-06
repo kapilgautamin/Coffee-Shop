@@ -25,6 +25,7 @@ mongoose
 var indexRouter = require("./routes/index");
 var itemsRouter = require("./routes/api/items");
 var usersRouter = require("./routes/api/users");
+var authRouter = require("./routes/api/auth");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -32,6 +33,7 @@ app.use(express.json());
 app.use("/", indexRouter);
 app.use("/api/items", itemsRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/auth", authRouter);
 
 // // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

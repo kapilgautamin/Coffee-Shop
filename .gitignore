@@ -105,3 +105,6 @@ dist
 
 #VS Code launch.json file
 launch.json
+
+#VS Code Rest Client file
+*.rest
