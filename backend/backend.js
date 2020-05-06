@@ -1,52 +1,36 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 // var cors = require("cors");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var videosRouter = require('./routes/videos');
-
-
 var app = express();
-// var PORT = 3001;
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 5000;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+//DB configuration
+const db = require('./config/keys').mongoURI;
+mongoose.connect(db)
+  .then(() => console.log("MongoDB Mongoose connected"))
+  .catch((err) => console.log(err));
+
+var indexRouter = require('./routes/index');
+var itemRouter = require('./routes/api/items');
+
 app.use(logger('dev'));
+app.use(bodyParser.json());
 // app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/videos', videosRouter);
+app.use('/api/items', itemRouter);
 
-
-app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' });
-});
-
-app.post('/api/world', (req, res) => {
-  console.log(req.body);
-  res.send(
-    `I received your POST request. This is what you sent me: ${req.body.post}`,
-  );
-});
-
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+// // catch 404 and forward to error handler
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
 
 // error handler
 app.use(function(err, req, res, next) {

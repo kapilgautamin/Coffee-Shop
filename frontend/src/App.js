@@ -33,18 +33,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // fetch('/videos')
-    // .then(res => res.json())
-    // .then(videos => this.setState({ videos }));
-
-    // fetch('/users')
-    //   .then(res => res.json())
-    //   .then(users => this.setState({ users }));
-
-    // this.callApi()
-    //   .then(res => this.setState({ response: res.express }))
-    //   .catch(err => console.log(err));
-
     const fetchPosts = async () => {
       this.setState({ loading: true });
       const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
@@ -56,28 +44,6 @@ class App extends Component {
   }
 
   componentDidUpdate() {}
-
-  // callApi = async () => {
-  //   const response = await fetch('/api/hello');
-  //   const body = await response.json();
-  //   if (response.status !== 200) throw Error(body.message);
-
-  //   return body;
-  // };
-
-  // handleSubmit = async e => {
-  //   e.preventDefault();
-  //   const response = await fetch('/api/world', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ post: this.state.post }),
-  //   });
-  //   const body = await response.text();
-
-  //   this.setState({ responseToPost: body });
-  // };
 
   paginate = (pageNumber) => this.setState({ currentPage: pageNumber });
 

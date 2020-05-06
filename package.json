@@ -3,18 +3,14 @@
   "version": "1.0.0",
   "description": "MERN Project",
   "scripts": {
-    "prebuild_backend": "cd backend && npm install",
-    "prebuild_frontend": "cd frontend && npm install",
-    "prebuild": "npm run prebuild_backend && npm run prebuild_frontend && npm install",
+    "prebuild_frontend": "npm install --prefix frontend",
     "frontend": "npm start --prefix frontend",
-    "backend": "nodemon backend/app.js",
-    "start": "concurrently --kill-others-on-fail \"npm run frontend\" \"npm run backend\"",
-    "production": "npm run build --prefix frontend && ncp frontend/build/ backend/build/"
+    "backend": "nodemon backend/backend.js",
+    "start": "concurrently --kill-others-on-fail \"npm run frontend\" \"npm run backend\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^5.1.0",
-    "ncp": "^2.0.0"
+    "concurrently": "^5.1.0"
   }
 }
