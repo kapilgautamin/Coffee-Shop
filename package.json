@@ -4,20 +4,23 @@
   "description": "MERN Project",
   "scripts": {
     "frontend-install": "npm install --prefix frontend",
-    "start": "node backend/backend.js",
+    "start": "node server.js",
     "frontend": "npm start --prefix frontend",
-    "backend": "nodemon backend/backend.js",
+    "backend": "nodemon server.js",
     "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Kapil Gautam",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "concurrently": "^5.1.0",
+    "config": "^3.3.1",
     "debug": "^4.1.1",
     "express": "^4.17.1",
     "hbs": "^4.1.1",
     "http-errors": "^1.7.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.12",
     "morgan": "^1.10.0"
   }

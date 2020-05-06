@@ -19,6 +19,9 @@ Express Commands:
     cd backend
     npm install -D nodemon
     npm install mongoose --save
+    npm install bcryptjs --save
+    npm install jsonwebtoken
+    npm install config
     npm install 
     nodemon backend.js
     //Since both React and express run on Port 3000, let us change express to run on Port 5000 instead

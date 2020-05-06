@@ -1,8 +1,8 @@
 const express = require("express");
-const path = require("path");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+const path = require("path");
+const config = require("config");
 // var cors = require("cors");
 
 var app = express();
@@ -13,20 +13,25 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
 //DB configuration
-const db = require("./config/keys").mongoURI;
+const db = config.get('mongoURI');
 mongoose
-  .connect(db)
+  .connect(db,{
+    useNewUrlParser:true,
+    useUnifiedTopology:true
+  })
   .then(() => console.log("MongoDB Mongoose connected"))
   .catch((err) => console.log(err));
 
 var indexRouter = require("./routes/index");
-var itemRouter = require("./routes/api/items");
+var itemsRouter = require("./routes/api/items");
+var usersRouter = require("./routes/api/users");
 
 app.use(logger("dev"));
-app.use(bodyParser.json());
+app.use(express.json());
 // app.use(cors());
 app.use("/", indexRouter);
-app.use("/api/items", itemRouter);
+app.use("/api/items", itemsRouter);
+app.use("/api/users", usersRouter);
 
 // // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
@@ -46,11 +51,11 @@ app.use(function (err, req, res, next) {
 
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
-  app.use(express.static('../frontend/build'));
+  app.use(express.static('frontend/build'));
 
   // Handle React routing, return all requests to React app
   app.get("*", function (req, res) {
-    res.sendFile(path.resolve(__dirname + '/../frontend/build/index.html'));
+    res.sendFile(path.resolve(__dirname + 'frontend/build/index.html'));
   });
 }
 
