@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "MERN Project",
   "scripts": {
-    "prebuild_frontend": "npm install --prefix frontend",
+    "frontend-install": "npm install --prefix frontend",
     "start": "node backend/backend.js",
     "frontend": "npm start --prefix frontend",
     "backend": "nodemon backend/backend.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run frontend\" \"npm run backend\"",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Kapil Gautam",
