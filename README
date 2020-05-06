@@ -27,7 +27,7 @@ Express Commands:
     //If cors Error
     npm install --save cors
     
-    //Express,morgan and mongoose need to be in outer package.json for execution and not in backend package.json
+    //Every backend package need to be in outer package.json for execution and not in backend/package.json
 
 Concurrent Execution of React and node:
     npm install -D concurrently
