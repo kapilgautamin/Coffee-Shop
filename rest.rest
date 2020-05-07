@@ -34,17 +34,19 @@
 
 # DELETE  http://localhost:5000/api/items/5eb23e8a111682625cde676c
 
-PUT http://localhost:5000/api/items/5eb3c6b1889fed639c9222d1
-content-type: application/json
-x-auth-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjMzMzBiZTczYWFiMmUwNDllMTFiMyIsImlhdCI6MTU4ODg0Nzg3OSwiZXhwIjoxNTg4ODU1MDc5fQ.-wbPkvG4M7zqwsxIBEzbWQjjJT-YwX1NjHNQi7sM1Sk
+# PUT http://localhost:5000/api/items/5eb3c6b1889fed639c9222d1
+# content-type: application/json
+# x-auth-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjMzMzBiZTczYWFiMmUwNDllMTFiMyIsImlhdCI6MTU4ODg0Nzg3OSwiZXhwIjoxNTg4ODU1MDc5fQ.-wbPkvG4M7zqwsxIBEzbWQjjJT-YwX1NjHNQi7sM1Sk
 
-{
-  "name": "takesaho magic",
-  "description": "add description",
-  "img": "http://tachyons.io/img/avatar_1.jpg",
-  "price": 10,
-  "units": 5
-}
+# {
+#   "name": "takesaho magic",
+#   "description": "add description",
+#   "img": "http://tachyons.io/img/avatar_1.jpg",
+#   "price": 10,
+#   "units": 5
+# }
+
+GET http://localhost:5000/api/items/category/Espresso/name/espresso
 
 GET http://localhost:5000/api/items/5eb3c6b1889fed639c9222d1
 

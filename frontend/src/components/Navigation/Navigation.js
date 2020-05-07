@@ -13,7 +13,7 @@ class Navigation extends React.PureComponent {
 
   componentDidMount() {
     var userAuth = JSON.parse(localStorage.getItem("userAuthDetails"));
-    if (userAuth && userAuth.isAuthorised) {
+    if (userAuth && userAuth.isAuthorised && userAuth.user.user.isAdmin) {
       this.setState({ isAuthUser: true });
     }
   }

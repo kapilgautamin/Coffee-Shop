@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import history from "../../../history";
 
 class AddProduct extends React.PureComponent {
   constructor(props) {
@@ -8,6 +9,7 @@ class AddProduct extends React.PureComponent {
       name: "",
       description: "",
       img: "",
+      category: "",
       price: 0,
       units: 0,
     };
@@ -23,11 +25,19 @@ class AddProduct extends React.PureComponent {
     const name = this.state.name;
     const description = this.state.description;
     const img = this.state.img;
+    const category = this.state.category;
     const price = this.state.price;
     const units = this.state.units;
 
     //Request body
-    const body = JSON.stringify({ name, description, img, price, units });
+    const body = JSON.stringify({
+      name,
+      description,
+      img,
+      category,
+      price,
+      units,
+    });
     var userAuth = JSON.parse(localStorage.getItem("userAuthDetails"));
     const config = {
       headers: {
@@ -38,6 +48,7 @@ class AddProduct extends React.PureComponent {
     axios.post("/api/items/", body, config).then(
       (res) => {
         console.log(res.data, res.status);
+        history.push("../Shop");
       },
       (err) => console.log(err)
     );
@@ -76,6 +87,18 @@ class AddProduct extends React.PureComponent {
               id="img"
               name="img"
               placeholder="Enter Image URL"
+              onChange={this.onChange.bind(this)}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="category">Category</label>
+            <input
+              type="text"
+              className="form-control"
+              id="category"
+              name="category"
+              value="Espresso"
+              placeholder="Enter Category"
               onChange={this.onChange.bind(this)}
             />
           </div>

@@ -1,7 +1,6 @@
 import React from "react";
 import Products from "../../containers/Products";
 import { Provider } from "react-redux";
-import axios from "axios";
 import Store from "../../Store";
 
 class Shop extends React.Component {
@@ -9,7 +8,6 @@ class Shop extends React.Component {
     super();
     this.state = {
       isAuthUser: false,
-      products: [],
       loading: false,
       currentPage: 1,
       itemsPerPage: 10,
@@ -17,18 +15,8 @@ class Shop extends React.Component {
   }
 
   componentDidMount() {
-    const fetchPosts = async () => {
-      this.setState({ loading: true });
-      const res = await axios.get("api/items");
-      // console.log("got data",res.data);
-      this.setState({ products: res.data });
-      this.setState({ loading: false });
-    };
-
-    fetchPosts();
-
     var userAuth = JSON.parse(localStorage.getItem("userAuthDetails"));
-    if (userAuth && userAuth.isAuthorised) {
+    if (userAuth && userAuth.isAuthorised && userAuth.user.user.isAdmin) {
       this.setState({ isAuthUser: true });
     }
   }
@@ -40,16 +28,24 @@ class Shop extends React.Component {
     var userAuth = JSON.parse(localStorage.getItem("userAuthDetails"));
     var isAuthentic = false;
     //case when navigation returned false due to refresh, but actual user is still logged in
-    if (userAuth && userAuth.isAuthorised !== this.props.isAuthorised)
-      isAuthentic = userAuth.isAuthorised;
-    else if (userAuth && userAuth.isAuthorised === this.props.isAuthorised)
+    if (
+      userAuth &&
+      userAuth.isAuthorised &&
+      userAuth.user.user.isAdmin !== this.props.isAuthorised
+    )
+      isAuthentic = userAuth.user.user.isAdmin;
+    else if (
+      userAuth &&
+      userAuth.isAuthorised &&
+      userAuth.user.user.isAdmin === this.props.isAuthorised
+    )
       isAuthentic = this.props.isAuthUser;
 
     return (
-      <div className="container clearfix d-flex flex-column">
+      <div className="container clearfix d-flex flex-column mt-1">
         <div className="row clearfix">
           <Provider store={Store}>
-            <Products isAuthUser={isAuthentic} products={this.state.products} />
+            <Products isAuthUser={isAuthentic} />
           </Provider>
         </div>
       </div>

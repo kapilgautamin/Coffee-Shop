@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import history from "../../../history";
 
 class UpdateProduct extends React.PureComponent {
   constructor(props) {
@@ -9,6 +10,7 @@ class UpdateProduct extends React.PureComponent {
       name: "",
       description: "",
       img: "",
+      category: "",
       price: 0,
       units: 0,
     };
@@ -29,6 +31,7 @@ class UpdateProduct extends React.PureComponent {
           name: item.name,
           description: item.description,
           img: item.img,
+          category: item.category,
           price: item.price,
           units: item.units,
         });
@@ -52,11 +55,19 @@ class UpdateProduct extends React.PureComponent {
     const name = this.state.name;
     const description = this.state.description;
     const img = this.state.img;
+    const category = this.state.category;
     const price = this.state.price;
     const units = this.state.units;
 
     //Request body
-    const body = JSON.stringify({ name, description, img, price, units });
+    const body = JSON.stringify({
+      name,
+      description,
+      img,
+      category,
+      price,
+      units,
+    });
     console.log("update", body);
     var userAuth = JSON.parse(localStorage.getItem("userAuthDetails"));
     const config = {
@@ -70,6 +81,7 @@ class UpdateProduct extends React.PureComponent {
     axios.put(uri, body, config).then(
       (res) => {
         console.log(res.data, res.status);
+        history.push("../Shop");
       },
       (err) => console.log(err)
     );
@@ -100,6 +112,7 @@ class UpdateProduct extends React.PureComponent {
               defaultValue={this.state.description}
               id="description"
               rows="3"
+              onChange={this.onChange.bind(this)}
             ></textarea>
           </div>
           <div className="form-group">
@@ -111,6 +124,18 @@ class UpdateProduct extends React.PureComponent {
               value={this.state.img}
               name="img"
               placeholder="Enter Image URL"
+              onChange={this.onChange.bind(this)}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="img">Category</label>
+            <input
+              type="text"
+              className="form-control"
+              id="category"
+              value={this.state.category}
+              name="category"
+              placeholder="Enter Category"
               onChange={this.onChange.bind(this)}
             />
           </div>

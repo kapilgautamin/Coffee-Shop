@@ -13,6 +13,10 @@ const ItemSchema = new Schema({
     img:{
         type:String
     },
+    category:{
+        type:String,
+        default:"Espresso"
+    },
     price:{
         type:Number,
         required:true

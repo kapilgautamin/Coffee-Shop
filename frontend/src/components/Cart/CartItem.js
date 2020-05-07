@@ -1,6 +1,6 @@
 import React from "react";
 
-const CartItem = ({ id, name, description, img, price, units, addProd }) => {
+const CartItem = ({ id, name, description, img,category, price, units, addProd }) => {
   return (
     <div className="row cart-detail">
       <div className="col-lg-3 col-sm-3 col-3 p-1">
@@ -17,7 +17,7 @@ const CartItem = ({ id, name, description, img, price, units, addProd }) => {
             type="button"
             className="btn btn-primary mx-1"
             onClick={() =>
-              addProd({ id, name, description, img, price, units: 1 })
+              addProd({ id, name, description, img,category, price, units: 1 })
             }
           >
             +
@@ -26,7 +26,7 @@ const CartItem = ({ id, name, description, img, price, units, addProd }) => {
             type="button"
             className="btn btn-warning mx-1"
             onClick={() =>
-              addProd({ id, name, description, img, price, units: -1 })
+              addProd({ id, name, description, img, category,price, units: -1 })
             }
           >
             -

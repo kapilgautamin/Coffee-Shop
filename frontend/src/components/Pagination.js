@@ -9,7 +9,7 @@ const Pagination = ({ itemsPerPage, totalItems, currentPage, paginate }) => {
 
   if (currentPage === 1) {
     return (
-      <nav>
+      <nav className="my-1">
         <ul className="pagination ml-5 pl-5">
           {pageNumbers.map((number) => (
             <li key={number} className="page-item">
@@ -33,7 +33,7 @@ const Pagination = ({ itemsPerPage, totalItems, currentPage, paginate }) => {
     );
   } else if (currentPage === lastPage) {
     return (
-      <nav>
+      <nav className="my-1">
         <ul className="pagination">
           <li className="page-item">
             <button
@@ -57,7 +57,7 @@ const Pagination = ({ itemsPerPage, totalItems, currentPage, paginate }) => {
     );
   } else {
     return (
-      <nav>
+      <nav className="my-1">
         <ul className="pagination">
           <li className="page-item">
             <button
