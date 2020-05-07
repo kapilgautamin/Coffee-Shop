@@ -1,29 +1,65 @@
 import React from "react";
 import CartItem from "./CartItem";
+import { addToCartAction } from "../../redux/actions/CartAction";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-export default class CartList extends React.PureComponent {
+class CartList extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    var localCart = localStorage.getItem("localCart");
+    var prevCart = [];
+    if (localCart) prevCart = JSON.parse(localCart);
+
+    var prevCartTotalAmount = 0;
+    var prevCartTotalQuantity = 0;
+
+    for (let i = 0; i < prevCart.length; i++) {
+      prevCartTotalAmount += prevCart[i].price * prevCart[i].units;
+      prevCartTotalQuantity += prevCart[i].units;
+    }
+
+    this.state = {
+      cart: prevCart,
+      cartTotalAmount: prevCartTotalAmount,
+      cartTotalQuantity: prevCartTotalQuantity,
+    };
+  }
+
   handleAddProduct = (product) => {
     // console.log("clicked",product);
-    // console.log("this",this.state);
     this.props.addToCartAction(product);
   };
 
-  render() {
-    const { cart } = this.props;
-    let cartTotal = 0;
+  updateStates = (cart) => {
+    let cartTotalAmount = 0;
     let cartTotalQuantity = 0;
     for (let i = 0; i < cart.length; i++) {
-      cartTotal += cart[i].price * cart[i].units;
+      cartTotalAmount += cart[i].price * cart[i].units;
       cartTotalQuantity += cart[i].units;
     }
-    // console.log(cart);
+    this.setState({
+      cart: cart,
+      cartTotalAmount: cartTotalAmount,
+      cartTotalQuantity: cartTotalQuantity,
+    });
+  };
+
+  componentDidUpdate() {
+    const { cart } = this.props;
+    this.updateStates(cart);
+    localStorage.setItem("localCart", JSON.stringify(cart));
+  }
+
+  render() {
     return (
       <div className="dropdown">
         <button type="button" className="btn btn-info" data-toggle="dropdown">
-          <i className="fa fa-shopping-cart" aria-hidden="true"></i>Shopping
-          Cart{" "}
+          <i className="fa fa-shopping-cart mr-1" aria-hidden="true"></i>
+          Shopping Cart{" "}
           <span className="badge badge-pill badge-danger">
-            {cartTotalQuantity}
+            {this.state.cartTotalQuantity}
           </span>
         </button>
         <form className="dropdown-menu">
@@ -31,16 +67,17 @@ export default class CartList extends React.PureComponent {
             <div className="col-lg-6 col-sm-6 col-6">
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>{" "}
               <span className="badge badge-pill badge-danger">
-                {cartTotalQuantity}
+                {this.state.cartTotalQuantity}
               </span>
             </div>
             <div className="col-lg-6 col-sm-6 col-6 total-section text-right">
               <p>
-                Total Amount: <span className="text-info">${cartTotal}</span>
+                Total Amount:{" "}
+                <span className="text-info">${this.state.cartTotalAmount}</span>
               </p>
             </div>
           </div>
-          {cart.map((item) => (
+          {this.state.cart.map((item) => (
             <CartItem {...item} key={item.id} addProd={this.handleAddProduct} />
           ))}
 
@@ -54,3 +91,20 @@ export default class CartList extends React.PureComponent {
     );
   }
 }
+
+const mapStateToProps = ({ cart }) => {
+  return {
+    cart: cart,
+  };
+};
+
+const mapActionsToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      addToCartAction,
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(CartList);

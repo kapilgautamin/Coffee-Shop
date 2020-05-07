@@ -1,6 +1,7 @@
 import React from "react";
 
-const Product = ({ id, name, description, img, price, addProd }) => {
+const Product = ({ id, name, description, img, price, addProd,isAuthUser }) => {
+  // console.log("single product auth", isAuthUser);
   return (
     <div className="card col-xl-3 col-lg-3 col-sm-6">
       <img src={img} className="img-thumbnail mx-2 img-fluid" alt={name} />
@@ -18,6 +19,14 @@ const Product = ({ id, name, description, img, price, addProd }) => {
           >
             Add
           </button>
+          {isAuthUser && (
+          <button
+            type="button"
+            className="btn btn-danger"
+          >
+            {"Delete"}
+          </button>)
+          }
         </div>
       </div>
     </div>

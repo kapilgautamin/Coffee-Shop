@@ -1,11 +1,18 @@
 import React, { Component } from "react";
-import { addToCartAction } from "../redux/actions/CartAction";
 import CartList from "../components/Cart/CartList";
 import Authorise from "./Authorise/Authorise";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { addToCartAction } from "../redux/actions/CartAction";
 
 class Navbar extends Component {
+  //coming here means user is authenticated
+  getUserAuthentication = (authDetails) => {
+    // console.log("user auth details", authDetails);
+    if (authDetails.isAuthorised)
+      localStorage.setItem("userAuthDetails", JSON.stringify(authDetails));
+    else localStorage.removeItem("userAuthDetails");
+    this.props.isAuthUser(authDetails.isAuthorised);
+  };
+
   render() {
     const { cart, addToCartAction } = this.props;
     return (
@@ -62,11 +69,6 @@ class Navbar extends Component {
                 </a>
               </div>
             </li>
-            <li className="nav-item">
-              <a className="nav-link disabled" href="#">
-                Disabled
-              </a>
-            </li>
           </ul>
           <form className="form-inline my-2 my-lg-0">
             <input
@@ -82,7 +84,7 @@ class Navbar extends Component {
               Search
             </button>
           </form>
-          <Authorise />
+          <Authorise authUser={this.getUserAuthentication} />
           <CartList cart={cart} addToCartAction={addToCartAction} />
         </div>
       </nav>
@@ -90,19 +92,4 @@ class Navbar extends Component {
   }
 }
 
-const mapStateToProps = ({ cart }) => {
-  return {
-    cart,
-  };
-};
-
-const mapActionsToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      addToCartAction,
-    },
-    dispatch
-  );
-};
-
-export default connect(mapStateToProps, mapActionsToProps)(Navbar);
+export default Navbar;

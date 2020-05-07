@@ -4,7 +4,11 @@ import { ADD_TO_CART } from "../actions/CartAction";
 //     payload: "data"
 // }
 
-const cartReducer = (state = [], action = {}) => {
+var localCart = localStorage.getItem("localCart");
+var prevCart = [];
+if (localCart) prevCart = JSON.parse(localCart);
+
+const cartReducer = (state = prevCart, action = {}) => {
   switch (action.type) {
     case ADD_TO_CART: {
       const product = action.payload;
@@ -18,6 +22,9 @@ const cartReducer = (state = [], action = {}) => {
           : [...cart, product];
 
       return updatedCart;
+    }
+    default: {
+      // console.log("Action not supported yet",action.type);
     }
   }
   return state;

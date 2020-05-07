@@ -13,11 +13,11 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
 //DB configuration
-const db = config.get('mongoURI');
+const db = config.get("mongoURI");
 mongoose
-  .connect(db,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true
+  .connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
   .then(() => console.log("MongoDB Mongoose connected"))
   .catch((err) => console.log(err));
@@ -53,11 +53,11 @@ app.use(function (err, req, res, next) {
 
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
-  app.use(express.static('frontend/build'));
+  app.use(express.static("frontend/build"));
 
   // Handle React routing, return all requests to React app
   app.get("*", function (req, res) {
-    res.sendFile(path.resolve(__dirname + 'frontend/build/index.html'));
+    res.sendFile(path.resolve(__dirname + "frontend/build/index.html"));
   });
 }
 

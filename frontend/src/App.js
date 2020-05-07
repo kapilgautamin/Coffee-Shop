@@ -20,17 +20,20 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      users: [],
-      videos: [],
-      response: "",
-      post: "",
-      responseToPost: "",
+      isAuthUser: false,
       comments: [],
       loading: false,
       currentPage: 1,
       itemsPerPage: 10,
     };
   }
+
+  paginate = (pageNumber) => this.setState({ currentPage: pageNumber });
+
+  setAuthLevel = (level) => {
+    console.log("Setting auth level in app.js to ", level);
+    this.setState({ isAuthUser: level });
+  };
 
   componentDidMount() {
     const fetchPosts = async () => {
@@ -41,11 +44,12 @@ class App extends Component {
     };
 
     fetchPosts();
+
+    var userAuth = JSON.parse(localStorage.getItem("userAuthDetails"));
+    if (userAuth && userAuth.isAuthorised) {
+      this.setState({ isAuthUser: true });
+    }
   }
-
-  componentDidUpdate() {}
-
-  paginate = (pageNumber) => this.setState({ currentPage: pageNumber });
 
   render() {
     const indexOfLastPost = this.state.currentPage * this.state.itemsPerPage;
@@ -58,12 +62,12 @@ class App extends Component {
     return (
       <>
         <Provider store={Store}>
-          <Navbar />
+          <Navbar isAuthUser={this.setAuthLevel} />
         </Provider>
         <div className="container clearfix d-flex flex-column">
           <div className="row clearfix">
             <Provider store={Store}>
-              <Products />
+              <Products isAuthUser={this.state.isAuthUser} />
             </Provider>
           </div>
           <div className="row d-flex flex-column">

@@ -40,7 +40,7 @@ router.post("/", (req, res) => {
             },
             config.get("jwtSecret"),
             {
-              expiresIn: 7200,  //2hours
+              expiresIn: 7200, //2hours
             },
             (err, token) => {
               if (err) throw err;

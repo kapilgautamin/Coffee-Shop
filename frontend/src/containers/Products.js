@@ -98,7 +98,7 @@ class Products extends PureComponent {
     const indexOfLastPost = this.state.currentPage * this.state.itemsPerPage;
     const indexOfFirstPost = indexOfLastPost - this.state.itemsPerPage;
     const currentPosts = products.slice(indexOfFirstPost, indexOfLastPost);
-
+    // console.log("Products auth user ",this.props.isAuthUser)
     return (
       <>
         <div className="d-flex align-content-start flex-wrap">
@@ -107,6 +107,7 @@ class Products extends PureComponent {
               key={product.id}
               {...product}
               addProd={this.handleAddProduct}
+              isAuthUser={this.props.isAuthUser}
             />
           ))}
         </div>
