@@ -7,6 +7,20 @@ const ItemSchema = new Schema({
         type:String,
         required:true
     },
+    description:{
+        type:String
+    },
+    img:{
+        type:String
+    },
+    price:{
+        type:Number,
+        required:true
+    },
+    units:{
+        type:Number,
+        require:true
+    },
     date:{
         type:Date,
         default:Date.now

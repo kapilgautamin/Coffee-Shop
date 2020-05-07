@@ -1,46 +1,62 @@
-GET http://localhost:5000/api/auth/user
-x-auth-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjI4MGJkOGE0OGUxMTliOGExMzhlNSIsImlhdCI6MTU4ODc1OTkzMiwiZXhwIjoxNTg4NzY3MTMyfQ.ln4azfxB56Fwy2DtVu84rpeb0VCDsWlrr6tUU-W8W4Y
+# # GET http://localhost:5000/api/auth/user
+# # x-auth-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjI4MGJkOGE0OGUxMTliOGExMzhlNSIsImlhdCI6MTU4ODc1OTkzMiwiZXhwIjoxNTg4NzY3MTMyfQ.ln4azfxB56Fwy2DtVu84rpeb0VCDsWlrr6tUU-W8W4Y
 
 
-POST http://localhost:5000/api/auth HTTP/1.1
+# POST http://localhost:5000/api/auth HTTP/1.1
+# content-type: application/json
+
+# {
+#     "email":"manu@gmail.com",
+#     "password":"manu123"
+# }
+
+
+# POST http://localhost:5000/api/items HTTP/1.1
+# content-type: application/json
+# x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjI4MGJkOGE0OGUxMTliOGExMzhlNSIsImlhdCI6MTU4ODc1OTkzMiwiZXhwIjoxNTg4NzY3MTMyfQ.ln4azfxB56Fwy2DtVu84rpeb0VCDsWlrr6tUU-W8W4Y
+
+# {
+#     "name": "johndoe"
+# }
+
+
+# GET http://localhost:5000/api/users
+
+
+# POST http://localhost:5000/api/users HTTP/1.1
+# content-type: application/json
+
+# {
+#     "name":"manu",
+#     "email":"manu@gmail.com",
+#     "password":123456
+# }
+
+# DELETE  http://localhost:5000/api/items/5eb23e8a111682625cde676c
+
+PUT http://localhost:5000/api/items/5eb3c6b1889fed639c9222d1
 content-type: application/json
+x-auth-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjMzMzBiZTczYWFiMmUwNDllMTFiMyIsImlhdCI6MTU4ODg0Nzg3OSwiZXhwIjoxNTg4ODU1MDc5fQ.-wbPkvG4M7zqwsxIBEzbWQjjJT-YwX1NjHNQi7sM1Sk
 
 {
-    "email":"manu@gmail.com",
-    "password":"123456"
+  "name": "takesaho magic",
+  "description": "add description",
+  "img": "http://tachyons.io/img/avatar_1.jpg",
+  "price": 10,
+  "units": 5
 }
+
+GET http://localhost:5000/api/items/5eb3c6b1889fed639c9222d1
 
 
 POST http://localhost:5000/api/items HTTP/1.1
 content-type: application/json
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjI4MGJkOGE0OGUxMTliOGExMzhlNSIsImlhdCI6MTU4ODc1OTkzMiwiZXhwIjoxNTg4NzY3MTMyfQ.ln4azfxB56Fwy2DtVu84rpeb0VCDsWlrr6tUU-W8W4Y
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYjMzMzBiZTczYWFiMmUwNDllMTFiMyIsImlhdCI6MTU4ODgzOTY0MiwiZXhwIjoxNTg4ODQ2ODQyfQ.X4-Ba1zSlP5R3qKUfCOjQ1MLZC7e0Hs4dUsTJ-ueN0s
 
 {
-    "name": "johndoe"
-}
-
-
-GET http://localhost:5000/api/users
-
-
-POST http://localhost:5000/api/users HTTP/1.1
-content-type: application/json
-
-{
-    "name":"manu",
-    "email":"manu@gmail.com",
-    "password":123456
-}
-
-DELETE  http://localhost:5000/api/items/5eb23e8a111682625cde676c
-
-
-GET http://localhost:5000/api/items
-
-
-POST http://localhost:5000/api/items HTTP/1.1
-content-type: application/json
-
-{
-    "name":"tanu"
+    "name": "espresso",
+    "description": "dark coffee",
+    "img": "http://tachyons.io/img/avatar_1.jpg",
+    "price": 4,
+    "units":5
 }

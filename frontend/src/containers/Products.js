@@ -4,6 +4,8 @@ import { bindActionCreators } from "redux";
 import Product from "../components/Products/Product";
 import Pagination from "../components/Pagination";
 import { addToCartAction } from "../redux/actions/CartAction";
+import history from "./../history";
+
 const products = [
   {
     id: 1,
@@ -82,7 +84,7 @@ class Products extends PureComponent {
     super();
     this.state = {
       currentPage: 1,
-      itemsPerPage: 8,
+      itemsPerPage: 3,
     };
   }
 
@@ -97,15 +99,32 @@ class Products extends PureComponent {
   render() {
     const indexOfLastPost = this.state.currentPage * this.state.itemsPerPage;
     const indexOfFirstPost = indexOfLastPost - this.state.itemsPerPage;
-    const currentPosts = products.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = this.props.products.slice(
+      indexOfFirstPost,
+      indexOfLastPost
+    );
+    // const currentPosts = products.slice(indexOfFirstPost, indexOfLastPost);
     // console.log("Products auth user ",this.props.isAuthUser)
+    console.log("Products fetched ", currentPosts);
     return (
       <>
+        <div className="clearfix">
+          {this.props.isAuthUser && (
+            <button
+              type="button"
+              className="btn btn-info mx-2"
+              onClick={() => history.push("/AddProduct")}
+            >
+              {"Add new Item"}
+            </button>
+          )}
+        </div>
         <div className="d-flex align-content-start flex-wrap">
           {currentPosts.map((product) => (
             <Product
-              key={product.id}
+              key={product._id}
               {...product}
+              id={product._id}
               addProd={this.handleAddProduct}
               isAuthUser={this.props.isAuthUser}
             />
@@ -113,7 +132,8 @@ class Products extends PureComponent {
         </div>
         <Pagination
           itemsPerPage={this.state.itemsPerPage}
-          totalItems={products.length}
+          totalItems={this.props.products.length}
+          // totalItems={products.length}
           currentPage={this.state.currentPage}
           paginate={this.paginate}
         />

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CartList from "../components/Cart/CartList";
 import Authorise from "./Authorise/Authorise";
-import { addToCartAction } from "../redux/actions/CartAction";
+import { withRouter } from 'react-router-dom';
 
 class Navbar extends Component {
   //coming here means user is authenticated
@@ -17,7 +17,7 @@ class Navbar extends Component {
     const { cart, addToCartAction } = this.props;
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/Home">
           Coffee Shop
         </a>
         <button
@@ -35,19 +35,24 @@ class Navbar extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="/">
                 Home <span className="sr-only">(current)</span>
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Link
+              <a className="nav-link" href="/About">
+                About
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/Shop">
+                Shop
               </a>
             </li>
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
-                href="#"
+                href="/Home"
                 id="navbarDropdown"
                 role="button"
                 data-toggle="dropdown"
@@ -57,14 +62,14 @@ class Navbar extends Component {
                 Dropdown
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="/Home">
                   Action
                 </a>
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="/Home">
                   Another action
                 </a>
                 <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="/Home">
                   Something else here
                 </a>
               </div>
@@ -92,4 +97,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+export default withRouter(Navbar);
