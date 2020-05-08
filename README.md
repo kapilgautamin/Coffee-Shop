@@ -1,10 +1,15 @@
 # Coffe Shop
 This project aims to implement a Coffee Shop E-commerce portal. A user can buy a particular coffee product and can place an order. The coffee includes the espresso, mocha, Americano, Caffe Latte, etc. The data is taken online from websites about coffee and may or may not be true.
 
+Project Video Link
+> ![Coffee Shop](https://github.com/kapilgautamin/Coffee-Shop/blob/master/CS6314.001-Team11-CoffeeShop.mp4)
+
+
 Languages used for implementation:
 - Frontend: React, Redux
 - Backend: Node, Express
 - Database: MongoDB Atlas Cluster
+
 For Authorization, JWT tokens were used.
 
 By default all users are Non-admin.
