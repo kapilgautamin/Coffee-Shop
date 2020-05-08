@@ -12,6 +12,7 @@ const DeleteProduct = (id) => {
     },
   };
   var uri = "/api/items/" + id;
+  //Hard Delete
   console.log(uri);
   axios.delete(uri, config).then(
     (res) => {
@@ -20,7 +21,7 @@ const DeleteProduct = (id) => {
     },
     (err) => console.log(err)
   );
-};
+ };
 
 const Product = ({
   id,
@@ -29,12 +30,15 @@ const Product = ({
   img,
   category,
   price,
+  softDelete,
   addProd,
   isAuthUser,
 }) => {
   // console.log("single product auth", isAuthUser);
   // console.log("product id is ", id);
   return (
+    <>
+    {!softDelete && (
     <div className="card col-xl-3 col-lg-3 col-sm-6 col-6">
       <img
         src={img}
@@ -63,7 +67,7 @@ const Product = ({
                 className="btn btn-danger mx-2"
                 onClick={() => DeleteProduct(id)}
               >
-                {"Delete"}
+                {"(Hard)Delete"}
               </button>
 
               <button
@@ -78,6 +82,8 @@ const Product = ({
         </div>
       </div>
     </div>
+    )}
+    </>
   );
 };
 

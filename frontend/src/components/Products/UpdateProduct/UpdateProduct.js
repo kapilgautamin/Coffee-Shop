@@ -11,8 +11,10 @@ class UpdateProduct extends React.PureComponent {
       description: "",
       img: "",
       category: "",
-      price: 0,
-      units: 0,
+      price: 1,
+      units: 1,
+      softDelete: false,
+      error: "",
     };
   }
 
@@ -34,6 +36,7 @@ class UpdateProduct extends React.PureComponent {
           category: item.category,
           price: item.price,
           units: item.units,
+          softDelete:item.softDelete
         });
         console.log("Item found in database", item);
       } else {
@@ -45,52 +48,112 @@ class UpdateProduct extends React.PureComponent {
   }
 
   onChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+    // console.log(event.target.name, event.target.value);
+    var incoming = event.target.value;
+    switch (event.target.name) {
+      case "name":
+        if (incoming.length > 5) this.setState({ error: "" });
+        else this.setState({ error: "Enter name more than 5 characters." });
+
+        break;
+      case "description":
+        console.log("less than 6");
+        if (incoming.length < 6) {
+          this.setState({
+            error: "Description should be more than 5 characters",
+          });
+        } else this.setState({ error: "" });
+        break;
+      case "category":
+        if (incoming.length < 3) {
+          this.setState({
+            error:
+              "Category name needs to be given and greater than 3 characters.",
+          });
+        } else this.setState({ error: "" });
+        break;
+      case "price":
+        if (Number.isInteger(parseInt(incoming))) this.setState({ error: "" });
+        else
+          this.setState({
+            error: "Price should be a number.",
+          });
+        break;
+      case "units":
+        if (Number.isInteger(parseInt(incoming))) this.setState({ error: "" });
+        else
+          this.setState({
+            error: "Unit should be a number.",
+          });
+        break;
+      case "softDelete":
+        this.setState({
+          softDelete: event.target.checked
+        });
+        break;
+      default:
+    }
+
+    if (event.target.name !== "softDelete")
+      this.setState({ [event.target.name]: event.target.value });
   };
 
   updateDatabase = (event) => {
     event.preventDefault();
-    // console.log(this.state);
-    const id = this.state.id;
-    const name = this.state.name;
-    const description = this.state.description;
-    const img = this.state.img;
-    const category = this.state.category;
-    const price = this.state.price;
-    const units = this.state.units;
-
-    //Request body
-    const body = JSON.stringify({
-      name,
-      description,
-      img,
-      category,
-      price,
-      units,
-    });
-    console.log("update", body);
-    var userAuth = JSON.parse(localStorage.getItem("userAuthDetails"));
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": userAuth.user.token,
-      },
-    };
-    var uri = "/api/items/" + id;
-    console.log(uri);
-    axios.put(uri, body, config).then(
-      (res) => {
-        console.log(res.data, res.status);
-        history.push("../Shop");
-      },
-      (err) => console.log(err)
-    );
+    if (this.state.error.length === 0) {
+      // console.log(this.state);
+      const id = this.state.id;
+      const name = this.state.name;
+      const description = this.state.description;
+      const img = this.state.img;
+      const category = this.state.category;
+      const price = this.state.price;
+      const units = this.state.units;
+      const softDelete = this.state.softDelete;
+      console.log(softDelete);
+      //Request body
+      const body = JSON.stringify({
+        name,
+        description,
+        img,
+        category,
+        price,
+        units,
+        softDelete
+      });
+      var userAuth = JSON.parse(localStorage.getItem("userAuthDetails"));
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": userAuth.user.token,
+        },
+      };
+      var uri = "/api/items/" + id;
+      console.log(uri);
+      axios.put(uri, body, config).then(
+        (res) => {
+          console.log(res.data, res.status);
+          history.push("../Shop");
+        },
+        (err) => {
+          this.setState({ error: "Item could not be updated. Check again." });
+          console.log(err);
+        }
+      );
+    }
   };
 
   render() {
     return (
       <div className="container">
         <h3>Enter item details:</h3>
+        {this.state.error.length > 0 && (
+          <ul className="list-group">
+            <li className="list-group-item list-group-item-danger">
+              {this.state.error}
+            </li>
+          </ul>
+        )}
         <form className="col-sm-9">
           <div className="form-group">
             <label htmlFor="name">Item Name</label>
@@ -165,7 +228,19 @@ class UpdateProduct extends React.PureComponent {
               onChange={this.onChange.bind(this)}
             />
           </div>
-
+          <div className="form-check">
+            <input
+              type="checkbox"
+              className="form-check-input"
+              id="softDelete"
+              name="softDelete"
+              checked={this.state.softDelete}
+              onChange={this.onChange.bind(this)}
+            />
+            <label className="form-check-label" htmlFor="softDelete">
+              Soft Delete
+            </label>
+          </div>
           <div className="col-lg-6 col-sm-6 col-6 checkout">
             <button
               onClick={this.updateDatabase.bind(this)}

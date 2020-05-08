@@ -19,11 +19,17 @@ const ItemSchema = new Schema({
     },
     price:{
         type:Number,
-        required:true
+        required:true,
+        default:0
     },
     units:{
         type:Number,
-        require:true
+        require:true,
+        default:0
+    },
+    softDelete:{
+        type:Boolean,
+        default:false
     },
     date:{
         type:Date,

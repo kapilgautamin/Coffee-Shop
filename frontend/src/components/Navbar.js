@@ -17,7 +17,7 @@ class Navbar extends Component {
     const { cart, addToCartAction } = this.props;
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="/Home">
+        <a className="navbar-brand" href="/Shop">
           Coffee Shop
         </a>
         <button
@@ -35,7 +35,7 @@ class Navbar extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="/">
+              <a className="nav-link" href="/Home">
                 Home <span className="sr-only">(current)</span>
               </a>
             </li>
@@ -47,6 +47,11 @@ class Navbar extends Component {
             <li className="nav-item">
               <a className="nav-link" href="/Shop">
                 Shop
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/ShowOrders">
+                Show Orders
               </a>
             </li>
           </ul>

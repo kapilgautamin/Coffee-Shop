@@ -1,3 +1,17 @@
+By default all users are Non-admin.
+Admin user can be set in database.
+
+Admin user:
+    Email : admin@gmail.com
+    Password : Admin@123
+
+Normal user:
+    Email : user@gmail.com 
+    Password : Password@123
+
+    Email : user2@gmail.com 
+    Password : Password@123
+
 
 React Commands:
     npm install -g create-react-app

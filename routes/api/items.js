@@ -69,6 +69,7 @@ router.put("/:id", auth, (req, res) => {
     category: req.body.category,
     price: req.body.price,
     units: req.body.units,
+    softDelete:req.body.softDelete
   };
   // console.log(updateItem);
   Item.findByIdAndUpdate({ _id: req.params.id }, updateItem, (err, update) => {
@@ -89,10 +90,13 @@ router.post("/", auth, (req, res) => {
     price: req.body.price,
     units: req.body.units,
   });
-  newItem.save().then((item) => res.json(item));
+  newItem
+    .save()
+    .then((item) => res.json(item))
+    .catch((err) => res.status(404).send(err));
 });
 
-//@Desc : Delete an Item
+//@Desc : Hard Delete an Item
 //@Access : Private
 //@Route: /api/items/:id
 router.delete("/:id", auth, (req, res) => {

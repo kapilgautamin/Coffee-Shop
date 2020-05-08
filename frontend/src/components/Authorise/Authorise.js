@@ -11,11 +11,11 @@ export default class Authorise extends React.PureComponent {
       isLogin: false,
       isRegister: true,
       isAuthenticated: false,
+      error: "",
     };
   }
 
   authenticateUser = (userData) => {
-    console.log("authenticate body", userData);
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -28,12 +28,15 @@ export default class Authorise extends React.PureComponent {
         this.props.authUser(data);
         this.setState({ isAuthenticated: true });
       },
-      (err) => console.log(err)
+      (err) => {
+        this.setState({ error: "Invalid Credentials" });
+        console.log(err);
+      }
     );
   };
 
   saveNewUser = (userData) => {
-    console.log("Register body", userData);
+    // console.log("Register body", userData);
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +49,9 @@ export default class Authorise extends React.PureComponent {
         this.props.authUser(data);
         this.setState({ isAuthenticated: true });
       },
-      (err) => console.log(err)
+      (err) => {
+        this.setState({ error: "Email already exists" });
+        console.log(err)}
     );
   };
 
@@ -141,6 +146,13 @@ export default class Authorise extends React.PureComponent {
                   </button>
                 </div>
               </div>
+              {this.state.error.length > 0 && (
+                <ul className="list-group">
+                  <li className="list-group-item list-group-item-danger">
+                    {this.state.error}
+                  </li>
+                </ul>
+              )}
               {this.state.isLogin && (
                 <SignIn userDetails={this.authenticateUser} />
               )}

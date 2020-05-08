@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Routes from "./Routes";
 import Navigation from "./components/Navigation/Navigation";
-// import Shop from './components/Shop/Shop';
 import "./App.css";
 
 class App extends Component {
