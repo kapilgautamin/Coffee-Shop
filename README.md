@@ -101,10 +101,15 @@ user  | This is a object which stores the userId, email and isAdmin details.
 - server.js - NodeJS, Express
 
 ## Project Setup
-> React : Port 3000 , Express : Port 5000
+> React : Port 3000
+
+> Express : Port 5000
+
 > Run `npm install` in main directory and frontend/ directory.
 
-Run project by / Concurrent Execution of React and Node: `npm run dev`
+Run project by (Concurrent Execution of React and Node) : `npm run dev`
+
+See the project at `http://localhost:3000`
 
 React Commands:
 ```
